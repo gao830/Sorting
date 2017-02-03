@@ -4,9 +4,12 @@ public class QuickSort2 {
 
 	public static void quickSort(int[] list, int first, int last) {
 
-		int pivot = partition(list, first, last);
-		quickSort(list, first, pivot - 1);
-		quickSort(list, pivot + 1, last);
+		if (last > first) {
+			int pivot = partition(list, first, last);
+			quickSort(list, first, pivot - 1);
+			quickSort(list, pivot + 1, last);
+		}
+
 	}
 
 	public static int partition(int[] list, int first, int last) {
@@ -41,7 +44,7 @@ public class QuickSort2 {
 
 	public static void main(String[] args) {
 
-		int[] array = { 2, 3, 2, 5, 6, 1, -2, 3, 14, 12 };
+		int[] array = { 10,-10,0,5,1,-2};
 		quickSort(array, 0, array.length - 1);
 		for (int x : array) {
 			System.out.print(x + " ");
