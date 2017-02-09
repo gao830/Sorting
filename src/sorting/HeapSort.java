@@ -1,4 +1,4 @@
-package collection;
+package sorting;
 
 public class HeapSort {
 

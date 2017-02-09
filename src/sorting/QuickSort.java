@@ -1,4 +1,4 @@
-package collection;
+package sorting;
 
 public class QuickSort {
 	static int[] arr = { 1, 8, 2, 0, 6, 3 };
