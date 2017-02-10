@@ -1,7 +1,7 @@
 package sorting;
 
 public class QuickSort {
-	static int[] arr = { 1, 8, 2, 0, 6, 3 };
+	static int[] arr = { -1, 10, 2, -5, 6, 10, 0, 7 };
 
 	public static void swap(int x, int y) {
 		int temp = arr[x];
@@ -12,8 +12,8 @@ public class QuickSort {
 	public static void quick_sort_recursive(int start, int end) {
 		if (start >= end)
 			return;
-		int mid = arr[end];
-		int left = start, right = end - 1;
+		int mid = arr[start];
+		int left = start+1, right = end ;
 		while (left < right) {
 			while (arr[left] < mid && left < right)
 				left++;
@@ -21,12 +21,13 @@ public class QuickSort {
 				right--;
 			swap(left, right);
 		}
-		if (arr[left] >= arr[end])
-			swap(left, end);
+		if (arr[right] < arr[start])
+			swap(right, start);
 		else
 			left++;
-		quick_sort_recursive(start, left - 1);
-		quick_sort_recursive(left + 1, end);
+		
+		quick_sort_recursive(start, right - 1);
+		quick_sort_recursive(right + 1, end);
 	}
 
 	public static void sort(int[] arrin) {

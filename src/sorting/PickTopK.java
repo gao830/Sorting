@@ -6,31 +6,36 @@ import java.util.Arrays;
 import com.sun.prism.TextureMap;
 
 public class PickTopK {
-	public static int[] list = { -1, 10, 2, -5, 6, 1, 0, 7 };
+	public static int[] list = { 4, 6, -30, 20, 1 };
+
+	public static int count = 0;
 
 	public static void main(String[] args) {
 
 		int k = 3;
 
 		ArrayList<Integer> arrayList = heapSort(list);
-	
-		selectionSort(list);
-		if (k <= list.length) {
-			int[] topKList = new int[k];
-			for (int i = 0; i < k; i++) {
-				topKList[i] = arrayList.get(i);
-			}
-			for (int element : topKList) {
-				System.out.print(element + " ");
-			}
 
-		} else {
-			System.out.println("k is larger than the list size");
+		quickSort(0, list.length - 1);
+		for (int element : list) {
+			System.out.print(element + " ");
 		}
+		// if (k <= list.length) {
+		// int[] topKList = new int[k];
+		// for (int i = 0; i < k; i++) {
+		// topKList[i] = arrayList.get(i);
+		// }
+		// for (int element : topKList) {
+		// System.out.print(element + " ");
+		// }
+		//
+		// } else {
+		// System.out.println("k is larger than the list size");
+		// }
 
 	}
 
-	public static  ArrayList<Integer>heapSort(int[] list) {
+	public static ArrayList<Integer> heapSort(int[] list) {
 
 		ArrayList<Integer> arrayList = new ArrayList<>();
 		ArrayList<Integer> arrayList1 = new ArrayList<>();
@@ -38,7 +43,7 @@ public class PickTopK {
 		// arrayList.add(element);
 		// }
 		arrayList = heapify(list);
-//		System.out.println(arrayList);
+		// System.out.println(arrayList);
 		// remove elements
 		while (arrayList.size() > 0) {
 			arrayList1.add(arrayList.get(0));
@@ -75,7 +80,7 @@ public class PickTopK {
 			}
 		}
 
-//		System.out.println(arrayList1);
+		// System.out.println(arrayList1);
 		return arrayList1;
 	}
 
@@ -117,10 +122,36 @@ public class PickTopK {
 
 	}
 
-	public static void quickSort(int[] list, int pivotIndex, int low, int high){
-		int pivot = list[pivotIndex];
+	public static void quickSort(int start, int end) {
+
+		if (start >= end)
+			return;
+		int left = start + 1;
+		int right = end;
+		int pivot = list[start];
+		while (left < right) {
+			while (list[left] >= pivot && left < right) {
+				left++;
+			}
+			while (list[right] < pivot && right > left) {
+				right--;
+			}
+
+			// if (list[right] < list[left]) {
+			swap(left, right);
+			// }
+		}
+		while (list[right] < pivot && right > start) {
+			right--;
+		}
+		if (list[right] > pivot) {
+			swap(start, right);
+		}
+
+		quickSort(start, right - 1);
+		quickSort(right + 1, end);
 	}
-	
+
 	public static void swap(int num1, int num2) {
 		int temp = list[num1];
 		list[num1] = list[num2];

@@ -44,7 +44,7 @@ public class QuickSort2 {
 
 	public static void main(String[] args) {
 
-		int[] array = { 10,-10,0,5,1,-2};
+		int[] array = { -1, 10, 2, -5, 6, 10, 0, 7};
 		quickSort(array, 0, array.length - 1);
 		for (int x : array) {
 			System.out.print(x + " ");
