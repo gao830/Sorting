@@ -31,7 +31,6 @@ class BinarySearchTree {
 	}
 
 	public boolean insert(int element) {
-		
 
 		if (root == null) {
 			root = new TreeNode(element);
@@ -51,7 +50,7 @@ class BinarySearchTree {
 					current = current.left;
 
 				} else {
-//					System.out.println("Duplicated element");
+					// System.out.println("Duplicated element");
 					return false;
 				}
 
@@ -67,8 +66,6 @@ class BinarySearchTree {
 		// System.out.println(element);
 		return true;
 	}
-
-
 
 	public void inOrderTraversal() {
 		inOrderTraversal(root);
@@ -110,6 +107,12 @@ class BinarySearchTree {
 		preOrderTraversal(root.right);
 
 	}
+
+	// Case 1: The node to be deleted does not have left child. Just connect its
+	// parent to its right child If the deleted node is the root, set root as
+	// its right child.
+	// Case 2: If the node has left child, find the rightmost node of left
+	// subtree(Or the leftmost of its right subtree?), then replace the node with
 
 	public void delete(int element) {
 
