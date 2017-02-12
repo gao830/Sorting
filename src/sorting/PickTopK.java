@@ -136,10 +136,7 @@ public class PickTopK {
 			while (list[right] < pivot && right > left) {
 				right--;
 			}
-
-			// if (list[right] < list[left]) {
 			swap(left, right);
-			// }
 		}
 		while (list[right] < pivot && right > start) {
 			right--;
