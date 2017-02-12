@@ -109,12 +109,64 @@ class BinarySearchTree {
 	}
 
 	// Case 1: The node to be deleted does not have left child. Just connect its
-	// parent to its right child If the deleted node is the root, set root as
+	// parent to its right child. If the deleted node is the root, set root as
 	// its right child.
 	// Case 2: If the node has left child, find the rightmost node of left
-	// subtree(Or the leftmost of its right subtree?), then replace the node with
+	// subtree(Or the leftmost of its right subtree?), then replace the node
+	// with that rightmost node.
 
-	public void delete(int element) {
+	public boolean delete(int element) {
+		TreeNode current = root;
+		TreeNode parent = null;
+		while (current != null) {
+			if (element > current.element) {
+				parent = current;
+				current = current.right;
+			} else if (element < current.element) {
+				parent = current;
+				current = current.left;
+			} else { // found element
+				break;
+			}
+
+		}
+		if (current == null) {
+			return false;
+		} else {
+			// case 1
+			if (current.left == null) {
+				if (parent == null) {// Deleting root
+					root = current.right;
+				} else {
+					if (element > parent.element) {
+						parent.right = current.right;
+					} else {
+						parent.left = current.right;
+					}
+				}
+			}
+			// case 2
+			else {
+				TreeNode rightMost = current.left;
+				TreeNode rightMostParent = current;
+				while (rightMost.right != null) {
+					rightMostParent = rightMost;
+					rightMost = rightMost.right;
+				}
+				current.element = rightMost.element;
+				if (rightMostParent.right == rightMost) {
+					rightMostParent.right = rightMost.left;
+				}
+
+				// Current node has only left sub trees, rightMostParent =
+				// current
+				else {
+					rightMostParent.left = rightMost.left;
+				}
+			}
+			size--;
+			return true;
+		}
 
 	}
 
@@ -128,12 +180,19 @@ public class BST {
 
 	public static void main(String[] args) {
 
-		int[] list = { 45, 57, 55, 67, 100, 107, 60 };
+		int[] list = { 100,60,105,30,70,101,106,10,45,65,80 };
+		
 		BinarySearchTree tree = new BinarySearchTree(list);
+		tree.insert(35);
+		tree.insert(33);
+		tree.delete(45);
+		tree.delete(105);
+		tree.delete(60);
 		tree.inOrderTraversal();
 		System.out.println();
 		tree.preOrderTraversal();
 		System.out.println();
+		
 		tree.postOrderTraversal();
 
 	}
